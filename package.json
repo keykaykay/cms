@@ -33,6 +33,7 @@
     "@unocss/reset": "^0.47.6",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.34.0",
+    "mockjs": "^1.1.0",
     "pnpm": "^7.27.0",
     "prettier": "^2.8.4",
     "sass": "^1.58.1",
@@ -42,6 +43,7 @@
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.1.1",
     "vite-plugin-html": "^3.2.0",
+    "vite-plugin-mock": "^2.9.6",
     "vite-plugin-pages": "^0.28.0",
     "vite-plugin-vue-layouts": "^0.7.0",
     "vue-tsc": "^1.1.0"

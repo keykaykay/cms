@@ -10,6 +10,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { viteMockServe } from 'vite-plugin-mock'
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
@@ -77,6 +78,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           'hover:text-#1e90ffFF',
           'color-#70a1ffFF',
         ],
+      }),
+      viteMockServe({
+        mockPath: 'mock',
+        localEnabled: true,
       }),
     ],
     resolve: {
