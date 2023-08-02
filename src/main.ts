@@ -1,3 +1,4 @@
+import '@unocss/reset/normalize.css'
 import 'uno.css'
 import 'animate.css'
 import '@/styles/index.css'

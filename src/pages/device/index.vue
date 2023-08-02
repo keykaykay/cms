@@ -9,9 +9,10 @@ const router = useRouter()
 const message = useMessage()
 const testStore = useTestStore()
 
-const tableProps = ref<ITableProps<IPerson>>({
+const tableProps = reactive<ITableProps<IPerson>>({
   tableLoading: true,
   data: testStore.data,
+  virtualScroll: false,
   columns: [
     {
       title: '姓名',
@@ -54,33 +55,33 @@ const tableProps = ref<ITableProps<IPerson>>({
     showSizePicker: true,
     pageSizes: [20, 50, 100],
     onChange: async (page: number) => {
-      tableProps.value.pagination && (tableProps.value.pagination.page = page)
-      tableProps.value.tableLoading = true
+      tableProps.pagination && (tableProps.pagination.page = page)
+      tableProps.tableLoading = true
       await testStore.fetchData()
-      tableProps.value.tableLoading = false
+      tableProps.tableLoading = false
     },
     onUpdatePageSize: async (pageSize: number) => {
-      if (tableProps.value.pagination) {
-        tableProps.value.pagination.pageSize = pageSize
-        tableProps.value.pagination.page = 1
+      if (tableProps.pagination) {
+        tableProps.pagination.pageSize = pageSize
+        tableProps.pagination.page = 1
       }
-      tableProps.value.tableLoading = true
+      tableProps.tableLoading = true
       await testStore.fetchData()
-      tableProps.value.tableLoading = false
+      tableProps.tableLoading = false
     },
   },
   refreshEvent: async () => {
-    tableProps.value.tableLoading = true
+    tableProps.tableLoading = true
     await testStore.fetchData()
-    tableProps.value.tableLoading = false
+    tableProps.tableLoading = false
   },
   addEditSureEvent: async (type, data, idx) => {
-    type === 'add' && tableProps.value.data.push(data)
-    type === 'edit' && tableProps.value.data.splice(idx, 1, data)
+    type === 'add' && tableProps.data.push(data)
+    type === 'edit' && tableProps.data.splice(idx, 1, data)
     return true
   },
   rowCellDeleteEvent(idx) {
-    tableProps.value.data.splice(idx, 1)
+    tableProps.data.splice(idx, 1)
   },
   rowCellClickEvent(data, idx) {
     router.push('/device/detail')
@@ -89,17 +90,17 @@ const tableProps = ref<ITableProps<IPerson>>({
     options.order = 'descend'
   },
   searchEvent(query) {
-    tableProps.value.tableLoading = true
+    tableProps.tableLoading = true
     console.error(query)
     setTimeout(() => {
-      tableProps.value.tableLoading = false
+      tableProps.tableLoading = false
     }, 1000)
   },
 })
 
 onMounted(async () => {
   await testStore.fetchData()
-  tableProps.value.tableLoading = false
+  tableProps.tableLoading = false
 })
 </script>
 

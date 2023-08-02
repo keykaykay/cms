@@ -9,7 +9,6 @@ onMounted(async () => {
   //     name: 'zkmefun',
   //   },
   // })
-  console.log(data.data)
 })
 </script>
 

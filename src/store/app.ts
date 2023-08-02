@@ -24,7 +24,7 @@ export const useAppStore = defineStore({
     menus(): AppRouteRecordRaw[] {
       return router
         .getRoutes()
-        .filter(route => route.meta.order)
+        .filter(route => route.meta.order && route.name)
         .sort((a, b) => Number(a.meta.order) - Number(b.meta.order))
     },
     activeKey() {
