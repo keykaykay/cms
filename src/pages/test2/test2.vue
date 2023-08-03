@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ITableProps } from '@/components/Table'
+import type { ITableProps, TDataColumn } from '@/components/Table'
 
 interface ISong {
   date: number
@@ -54,47 +54,44 @@ const tableProps = ref<ITableProps<ISong>>({
   },
 })
 
-// const columns: DataTableColumn<ISong>[] = [
-//   {
-//     title: 'No',
-//     key: 'date',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Title',
-//     key: 'name',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Length',
-//     key: 'address',
-//     align: 'center',
-//     width: 150,
-//   },
-// ]
-// const tableData: ISong[] = new Array(100).fill(0).map((_, idx) => ({
-//   date: idx,
-//   name: `Tom-${idx}-${idx}`,
-//   address: `No.${idx}-${idx}-${idx}`,
-//   button: `${idx}-btn`,
-// }))
+const columns: TDataColumn<ISong>[] = [
+  {
+    title: '姓名',
+    key: 'name',
+    align: 'center',
+    sorter: true,
+  },
+  {
+    title: '年龄',
+    key: 'date',
+    sorter: true,
+  },
+  {
+    title: '性别',
+    key: 'address',
+  },
+]
+const tableData: ISong[] = new Array(100).fill(0).map((_, idx) => ({
+  date: idx,
+  name: `Tom-${idx}-${idx}`,
+  address: `No.${idx}-${idx}-${idx}`,
+  button: `${idx}-btn`,
+}))
 
-// const pagination = reactive<PaginationProps>({
-//   page: 1,
-//   pageSize: 20,
-//   itemCount: 100,
-//   showSizePicker: true,
-//   pageSizes: [20, 50, 100],
-//   onChange: (page: number) => {
-//     pagination.page = page
-//   },
-//   onUpdatePageSize: (pageSize: number) => {
-//     pagination.pageSize = pageSize
-//     pagination.page = 1
-//   },
-// })
+const pagination = reactive({
+  page: 1,
+  pageSize: 20,
+  itemCount: 100,
+  showSizePicker: true,
+  pageSizes: [20, 50, 100],
+  onChange: (page: number) => {
+    pagination.page = page
+  },
+  onUpdatePageSize: (pageSize: number) => {
+    pagination.pageSize = pageSize
+    pagination.page = 1
+  },
+})
 const loading = ref(true)
 
 setTimeout(() => {
@@ -104,8 +101,19 @@ setTimeout(() => {
 
 <template>
   <div class="w-full h-full">
-    <n-card class="w-full h-full">
-      <!-- <n-data-table
+    <n-data-table
+      v-loading="loading"
+      class="w-full h-full"
+      :columns="columns"
+      :data="tableData"
+      :pagination="pagination"
+      :single-line="false"
+      max-height="100%"
+      flex-height
+      remote
+    />
+    <!-- <n-card class="w-full h-full"> -->
+    <!-- <n-data-table
         v-loading="loading"
         class="w-full h-full"
         :columns="columns"
@@ -115,9 +123,10 @@ setTimeout(() => {
         max-height="100%"
         flex-height
         remote
+        virtual-scroll
       /> -->
-      <Table v-bind="tableProps" />
-    </n-card>
+    <!-- <Table v-bind="tableProps" /> -->
+    <!-- </n-card> -->
   </div>
 </template>
 

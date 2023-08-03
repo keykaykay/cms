@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import LayoutHeader from './comp/layoutHeader.vue'
-import LayoutSider from './comp/layoutSider.vue'
-
 const wrapRef = ref<HTMLElement>()
 </script>
 

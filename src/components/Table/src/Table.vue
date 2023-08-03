@@ -84,7 +84,7 @@ export interface ITableProps<T = any> {
 }
 
 const props = withDefaults(defineProps<ITableProps>(), {
-  virtualScroll: true,
+  virtualScroll: false,
   hiddenHeader: false,
   hiddenHeaderSearch: false,
   hiddenHeaderHandle: false,
@@ -519,7 +519,7 @@ const handleSearchQueryEvent = () => {
     <template #default>
       <n-data-table
         ref="tableRef"
-        v-loading="tableLoading"
+        :loading="tableLoading"
         class="flex-1 w-full h-full"
         max-height="100%"
         flex-height
@@ -529,7 +529,7 @@ const handleSearchQueryEvent = () => {
         :data="data"
         :scroll-x="scrollX"
         :row-props="handleRowProps"
-        virtual-scroll
+        :virtual-scroll="virtualScroll"
         remote
         @update:sorter="handleSorterChange"
       />

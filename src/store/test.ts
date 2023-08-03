@@ -20,7 +20,7 @@ export const useTestStore = defineStore({
     async fetchData() {
       return new Promise<void>((resolve) => {
         this.data.length = 0
-        for (let index = 0; index < 20; index++) {
+        for (let index = 0; index < 100; index++) {
           this.data.push({
             name: `${Math.floor((Date.now() + index * index) / 2)}-${index}`,
             age: Date.now() + index * index,
@@ -29,7 +29,7 @@ export const useTestStore = defineStore({
         }
         setTimeout(() => {
           resolve()
-        }, 250)
+        }, 0)
       })
     },
   },

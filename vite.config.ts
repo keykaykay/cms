@@ -24,6 +24,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         reactivityTransform: true,
       }),
       Pages({
+        dirs: 'src/pages',
         extensions: ['vue', 'js', 'jsx', 'tsx'],
       }),
       Layouts(),

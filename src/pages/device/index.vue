@@ -3,7 +3,6 @@ import { NButton, NRadio, NRadioGroup, useMessage } from 'naive-ui'
 import type { ITableProps } from '@/components/Table'
 import type { IPerson } from '@/store/test'
 import { useTestStore } from '@/store/test'
-import Table from '@/components/Table'
 
 const router = useRouter()
 const message = useMessage()
@@ -99,8 +98,14 @@ const tableProps = reactive<ITableProps<IPerson>>({
 })
 
 onMounted(async () => {
+  tableProps.tableLoading = true
   await testStore.fetchData()
   tableProps.tableLoading = false
+  nextTick(async () => {
+    tableProps.tableLoading = true
+    // await testStore.fetchData()
+    tableProps.tableLoading = false
+  })
 })
 </script>
 
